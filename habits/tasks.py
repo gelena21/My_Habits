@@ -13,11 +13,15 @@ def send_message_habit():
     habits = Habit.objects.all()
     for habit in habits:
 
-        if (now_time_hour == habit.time_execute.hour and
-                now_time_minute == habit.time_execute.minute):
-            text = (f'Напоминание о выполнении привычки\n'
-                    f'Выполнить: {habit.action}\n'
-                    f'Время: {habit.time_execute}\n'
-                    f'Место: {habit.place}')
+        if (
+            now_time_hour == habit.time_execute.hour
+            and now_time_minute == habit.time_execute.minute
+        ):
+            text = (
+                f"Напоминание о выполнении привычки\n"
+                f"Выполнить: {habit.action}\n"
+                f"Время: {habit.time_execute}\n"
+                f"Место: {habit.place}"
+            )
             chat_id = habit.user.chat_id
             create_bot_telegram(chat_id, text)

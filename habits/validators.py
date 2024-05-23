@@ -94,6 +94,8 @@ class PeriodicValidator:
             periodicity = dict(value).get(self.field)
 
             if periodicity and (periodicity < 1 or periodicity > 7):
-                raise ValidationError("Интервал задания периодичности должен быть от 1 до 7 дней!")
+                raise ValidationError(
+                    "Интервал задания периодичности должен быть от 1 до 7 дней!"
+                )
             if periodicity == 0:
                 raise ValidationError("Периодичность не может быть равна нулю!")

@@ -14,6 +14,7 @@ class HabitAPIViewSet(ModelViewSet):
     """
     ViewSet для работы с привычками. Реализует CRUD операции и пагинацию.
     """
+
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
     pagination_class = HabitPaginator
@@ -41,15 +42,15 @@ class HabitAPIViewSet(ModelViewSet):
         """
         Переопределение метода для установки прав доступа в зависимости от действия.
         """
-        if self.action == 'create':
+        if self.action == "create":
             self.permission_classes = [IsAuthenticated]
-        elif self.action == 'list':
+        elif self.action == "list":
             self.permission_classes = [IsAuthenticated, IsUser | IsAdminUser]
-        elif self.action == 'retrieve':
+        elif self.action == "retrieve":
             self.permission_classes = [IsAuthenticated, IsUser | IsAdminUser]
-        elif self.action == 'update':
+        elif self.action == "update":
             self.permission_classes = [IsAuthenticated, IsUser | IsAdminUser]
-        elif self.action == 'destroy':
+        elif self.action == "destroy":
             self.permission_classes = [IsAuthenticated, IsUser]
         return [permission() for permission in self.permission_classes]
 
@@ -58,6 +59,7 @@ class UserHabitListApiView(generics.ListAPIView):
     """
     Представление для получения списка привычек текущего пользователя.
     """
+
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
 

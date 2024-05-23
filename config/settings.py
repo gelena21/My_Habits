@@ -22,15 +22,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    'habits',
-    'users',
-    'rest_framework',
+    "habits",
+    "users",
+    "rest_framework",
     "rest_framework_simplejwt",
-    'drf_spectacular',
-    'django_celery_beat',
+    "drf_spectacular",
+    "django_celery_beat",
     "corsheaders",
-
 ]
 
 MIDDLEWARE = [
@@ -43,7 +41,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -72,27 +69,23 @@ DATABASES = {
         "NAME": os.getenv("POSTGRES_DB"),
         "USER": os.getenv("POSTGRES_USER"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": os.getenv("POSTGRES_HOST")
+        "HOST": os.getenv("POSTGRES_HOST"),
     }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME":
-            "django.contrib.auth.password_validation."
-            "UserAttributeSimilarityValidator",
-    },
-    {
         "NAME": "django.contrib.auth.password_validation."
-                "MinimumLengthValidator",
+        "UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation."
-                "CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation." "MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth."
-                "password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation." "CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth." "password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -113,25 +106,22 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    'DEFAULT_PAGINATION_CLASS':
-        'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 5,
-    "DEFAULT_PERMISSION_CLASSES": [
-        'rest_framework.permissions.IsAuthenticated'],
-    "DEFAULT_SCHEMA_CLASS":
-        "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 5,
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=8),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=16),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=8),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=16),
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your Project API',
-    'DESCRIPTION': 'Your project description',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
+    "TITLE": "Your Project API",
+    "DESCRIPTION": "Your project description",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
@@ -144,17 +134,16 @@ CELERY_TASK_TRACK_STARTED = True
 
 CELERY_TASK_TIME_LIMIT = 25 * 65
 
-CELERY_BEAT_SCHEDULER =\
-    "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
 CELERY_BEAT_SCHEDULE = {
     "task-name": {
         "task": "habits.tasks.send_message_habit",
-        'schedule': timedelta(seconds=59),
+        "schedule": timedelta(seconds=59),
     },
 }
 
-TOKEN_BOT_TELEGRAM = os.getenv('TOKEN_BOT_TELEGRAM')
+TOKEN_BOT_TELEGRAM = os.getenv("TOKEN_BOT_TELEGRAM")
 
 CORS_ALLOWED_ORIGINS = [
     "https://example.com",

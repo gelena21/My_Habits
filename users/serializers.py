@@ -14,8 +14,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         Получение JWT-токена с дополнительными полями username и email.
         """
         token = super().get_token(user)
-        token['username'] = user.username
-        token['email'] = user.email
+        token["username"] = user.username
+        token["email"] = user.email
         return token
 
 
@@ -36,13 +36,13 @@ class UserSerializerCreate(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'password']
+        fields = ["email", "password"]
 
     def create(self, validated_data):
         """
         Метод для создания нового пользователя с хэшированным паролем.
         """
         user = User(**validated_data)
-        user.set_password(validated_data['password'])
+        user.set_password(validated_data["password"])
         user.save()
         return user
