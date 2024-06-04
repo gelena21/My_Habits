@@ -2,14 +2,13 @@ FROM python:3.12
 
 WORKDIR /app
 
-RUN curl -sSL https://install.python-poetry.org | python3 -
-
-ENV PATH="/root/.local/bin:${PATH}"
-
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry install --no-root
+RUN pip install --upgrade pip \
+    && pip install poetry \
+    && poetry config virtualenvs.create false \
+    && poetry install --no-root
 
 COPY . .
 
-CMD ["poetry", "run", "python", "app.py"]
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
