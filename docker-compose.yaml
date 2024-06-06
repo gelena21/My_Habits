@@ -1,4 +1,4 @@
-#version: "3.9"
+version: "3.9"
 
 services:
 
@@ -41,7 +41,7 @@ services:
   celery:
     build: .
     tty: true
-    command: poetry run celery -A config worker -l INFO
+    command: celery -A config worker -l INFO
     restart: on-failure
     volumes:
       - .:/app
@@ -55,7 +55,7 @@ services:
   celery-beat:
     build: .
     tty: true
-    command: poetry run celery -A config worker --beat --scheduler django --loglevel=info
+    command: celery -A config worker --beat --scheduler django --loglevel=info
     restart: on-failure
     volumes:
       - .:/app
